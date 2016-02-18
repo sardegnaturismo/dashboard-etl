@@ -1,0 +1,11 @@
+#BUILD IMAGE
+docker build -t kettle:5.4 .
+
+#RUN CONTAINER
+docker run --name kettle -dti --restart=always kettle:5.4
+
+#CONNECT TO BASH
+#user pentaho
+docker exec -ti kettle bash
+#user root
+docker exec -ti -u root kettle bash
