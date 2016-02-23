@@ -1,8 +1,8 @@
 #BUILD IMAGE
-docker build -t kettle:5.4 .
+docker build -t kettle:5.0 .
 
 #RUN CONTAINER
-docker run --name kettle -dti --restart=always kettle:5.4
+docker run --name kettle -dti --restart=always kettle:5.0
 
 #CONNECT TO BASH
 #user pentaho
