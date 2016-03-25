@@ -32,8 +32,33 @@ RUN /usr/bin/wget --progress=dot:giga http://downloads.sourceforge.net/project/p
     /usr/bin/unzip -q /tmp/pdi-ce-${KETTLE_TAG}.zip -d  $PENTAHO_HOME; \
     rm /tmp/pdi-ce-${KETTLE_TAG}.zip
 
-# Quando ci si collega alla bash, $pwd = WORKDIR
-WORKDIR /opt/pentaho
+RUN mkdir -p ${PENTAHO_HOME}/.kettle
+RUN mkdir -p ${PENTAHO_HOME}/setup
+# Librerie customizzate
+COPY ./kettle-engine-5.0.1-stable.jar ${PENTAHO_HOME}/data-integration/lib/kettle-engine-5.0.1-stable.jar
+COPY ./kettle-ui-swt-5.0.1-stable-1.jar ${PENTAHO_HOME}/data-integration/lib/kettle-ui-swt-5.0.1-stable-1.jar
+# Trasformazione kettle per cifratura password + script creazione file repositories.xml parametrizzato
+COPY ./repositories_xml.ktr ${PENTAHO_HOME}/setup
+COPY ./create_repo.sh ${PENTAHO_HOME}/setup
+# Script e trasformazione kettle per modifiche parametriche al file kettle.properties
+COPY ./kettle.properties ${PENTAHO_HOME}/.kettle
+COPY ./kettle_properties.ktr ${PENTAHO_HOME}/setup
+COPY ./create_properties.sh ${PENTAHO_HOME}/setup
+# Script trasformazioni kettle per caricamenti notturni
+COPY scripts_trasformazioni ${PENTAHO_HOME}/setup/scripts_trasformazioni
+# Script di orchestrazione all'avvio, richiama gli altri script
+COPY ./setup.sh ${PENTAHO_HOME}/setup/setup.sh
 
-# Tramite la definizione del Volume, i file sotto /opt/pentaho sono rimappati in maniera persistente sul FS dell'host
-VOLUME /opt/pentaho
+USER root
+RUN chown -R pentaho:pentaho ${PENTAHO_HOME}
+#RUN /root/setup.sh
+
+USER pentaho
+
+# Quando ci si collega alla bash, $pwd = WORKDIR
+WORKDIR ${PENTAHO_HOME}
+
+# Tramite la definizione del Volume, i file sotto ${PENTAHO_HOME} sono rimappati in maniera persistente sul FS dell'host
+VOLUME ${PENTAHO_HOME}
+
+CMD ["/bin/bash", "/opt/pentaho/setup/setup.sh"]
