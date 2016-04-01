@@ -1,4 +1,8 @@
 #!/bin/bash
+DATA=$(date +%Y%m%d)
+
+sudo /etc/init.d/postfix start
+sudo netstat -ntlp
 
 #create_repo.sh -> crea repositories.xml
 ${PENTAHO_HOME}/setup/create_repo.sh
@@ -14,7 +18,8 @@ echo " -------------------------------------------- "
 cat ${PENTAHO_HOME}/.kettle/kettle.properties
 
 #script di trasformazioni notturne
-echo "avvio caricamenti ETL"
+mkdir ${PENTAHO_HOME}/log_caricamenti
+echo "inizio esecuzione script"
 #da web service a elastic
 ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_strutture_estese.sh
 ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_web.sh
@@ -25,4 +30,11 @@ ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimen
 ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_operatore/dash_operatore.sh
 ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_cittadino/dash_cittadino.sh
 
-echo "script terminati"
+# FINE SCRIPT - Invio mail
+#zip dei log e file di configurazione
+zip -r ContainerKettle_${DATA}.zip ${PENTAHO_HOME}/.kettle/repositories.xml ${PENTAHO_HOME}/.kettle/kettle.properties  ${PENTAHO_HOME}/log_caricamenti
+echo "zip fatto"
+{ echo " In allegato i file di configurazione di Kettle e i log dei caricamenti ETL " ; uuencode ContainerKettle_${DATA}.zip ContainerKettle_${DATA}.zip ; } | mail -s "Report LOG - Container Kettle Sired" "$DESTINATARI" ;
+sleep 300
+echo "mail inviata - kill del container"
+

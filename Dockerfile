@@ -14,7 +14,7 @@ RUN apt-get update; apt-get install zip netcat -y; \
     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y oracle-java7-installer && \
+    apt-get install -y oracle-java7-installer postfix sharutils mailutils  && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm -rf /var/cache/oracle-jdk7-installer
 
@@ -38,18 +38,19 @@ RUN mkdir -p ${PENTAHO_HOME}/setup
 COPY ./kettle-engine-5.0.1-stable.jar ${PENTAHO_HOME}/data-integration/lib/kettle-engine-5.0.1-stable.jar
 COPY ./kettle-ui-swt-5.0.1-stable-1.jar ${PENTAHO_HOME}/data-integration/lib/kettle-ui-swt-5.0.1-stable-1.jar
 # Trasformazione kettle per cifratura password + script creazione file repositories.xml parametrizzato
-COPY ./repositories_xml.ktr ${PENTAHO_HOME}/setup
-COPY ./create_repo.sh ${PENTAHO_HOME}/setup
+COPY ./repositories_xml.ktr ${PENTAHO_HOME}/setup/repositories_xml.ktr
+COPY ./create_repo.sh ${PENTAHO_HOME}/setup/create_repo.sh
 # Script e trasformazione kettle per modifiche parametriche al file kettle.properties
-COPY ./kettle.properties ${PENTAHO_HOME}/.kettle
-COPY ./kettle_properties.ktr ${PENTAHO_HOME}/setup
-COPY ./create_properties.sh ${PENTAHO_HOME}/setup
+COPY ./kettle.properties ${PENTAHO_HOME}/.kettle/kettle.properties
+COPY ./kettle_properties.ktr ${PENTAHO_HOME}/setup/kettle_properties.ktr
+COPY ./create_properties.sh ${PENTAHO_HOME}/setup/create_properties.sh
 # Script trasformazioni kettle per caricamenti notturni
 COPY scripts_trasformazioni ${PENTAHO_HOME}/setup/scripts_trasformazioni
 # Script di orchestrazione all'avvio, richiama gli altri script
 COPY ./setup.sh ${PENTAHO_HOME}/setup/setup.sh
 
 USER root
+RUN echo "pentaho ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R pentaho:pentaho ${PENTAHO_HOME}
 #RUN /root/setup.sh
 
