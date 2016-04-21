@@ -92,20 +92,19 @@
   <hop> <from>Add constants</from><to>Concat Fields</to><enabled>Y</enabled> </hop>
   <hop> <from>Dummy &#x28;do nothing&#x29; 2</from><to>Get System Info 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get System Info 2</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get System Info</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants 2</from><to>Concat Fields 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 2</from><to>Concat Fields 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 2 2</from><to>Concat Fields 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 3</from><to>Concat Fields 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 4</from><to>Concat Fields 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 5</from><to>Concat Fields 6</to><enabled>Y</enabled> </hop>
-  <hop> <from>Concat Fields 6</from><to>Row Normaliser</to><enabled>Y</enabled> </hop>
-  <hop> <from>Row Normaliser</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Property Input</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Property Input </from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat Fields</from><to>Properties Output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 2</from><to>Concat Fields 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 2</from><to>Concat Fields 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 2 2</from><to>Concat Fields 4</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 4</from><to>Concat Fields 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 5</from><to>Row Normaliser</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get System Info</from><to>Select values 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Row Normaliser</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -136,6 +135,111 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>908</xloc>
       <yloc>195</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>SIRED_ELA_MOV_TEMP_T</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x2f;movimenti&#x2f;mov_</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>http_ini</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>http&#x3a;&#x2f;&#x2f;</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SIRED_ELA_STRUT_TEMP_T</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x2f;strutture_estese&#x2f;ricettive_</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SIRED_ELA_MOV_SOLID_TEMP_T</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x2f;movimenti_solid&#x2f;mov_solid_</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SIRED_ELA_MOV_BACK_TEMP_T</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x2f;movimenti_back_office&#x2f;mov_back_</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SIRED_STG_DB_INPUT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>stg_sired</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>SIRED_DASH_DB_INPUT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>target_sired</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>264</xloc>
+      <yloc>316</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -217,343 +321,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>990</xloc>
       <yloc>195</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29;</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>692</xloc>
-      <yloc>45</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29; 2</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>690</xloc>
-      <yloc>193</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get System Info 2</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>PATH_OUT</name>
-        <type>command line argument 10</type>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>807</xloc>
-      <yloc>196</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Properties Output</name>
-    <type>PropertyOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keyfield>Chiave</keyfield>
-    <valuefield>Valore</valuefield>
-    <comment/>
-    <fileNameInField>Y</fileNameInField>
-    <fileNameField>path_completo</fileNameField>
-    <file>
-      <name/>
-      <extention>properties</extention>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <create_parent_folder>N</create_parent_folder>
-    <addtoresult>N</addtoresult>
-    <append>N</append>
-      </file>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>195</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Property Input</name>
-    <type>PropertyInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <file_type>property</file_type>
-    <encoding>UTF-8</encoding>
-    <include>N</include>
-    <include_field/>
-    <filename_Field/>
-    <rownum>N</rownum>
-    <isaddresult>Y</isaddresult>
-    <filefield>N</filefield>
-    <rownum_field/>
-    <resetrownumber>N</resetrownumber>
-    <resolvevaluevariable>N</resolvevaluevariable>
-    <ini_section>N</ini_section>
-    <ini_section_field/>
-    <section/>
-    <file>
-      <name>&#x2f;opt&#x2f;pentaho&#x2f;.kettle&#x2f;kettle.properties</name>
-      <exclude_filemask/>
-      <filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>Chiave</name>
-        <column>key</column>
-        <type>String</type>
-        <format/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Valore</name>
-        <column>value</column>
-        <type>String</type>
-        <format/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <currency/>
-        <decimal/>
-        <group/>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>101</xloc>
-      <yloc>108</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get System Info</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>SIRED_STG_IP_INPUT</name>
-        <type>command line argument 1</type>
-        </field>
-      <field>
-        <name>SIRED_STG_PORTA_INPUT</name>
-        <type>command line argument 2</type>
-        </field>
-      <field>
-        <name>SIRED_STG_USR_INPUT</name>
-        <type>command line argument 3</type>
-        </field>
-      <field>
-        <name>SIRED_STG_PSW_INPUT</name>
-        <type>command line argument 4</type>
-        </field>
-      <field>
-        <name>SIRED_DASH_IP_INPUT</name>
-        <type>command line argument 5</type>
-        </field>
-      <field>
-        <name>SIRED_DASH_PORTA_INPUT</name>
-        <type>command line argument 6</type>
-        </field>
-      <field>
-        <name>SIRED_DASH_USR_INPUT</name>
-        <type>command line argument 7</type>
-        </field>
-      <field>
-        <name>SIRED_DASH_PSW_INPUT</name>
-        <type>command line argument 8</type>
-        </field>
-      <field>
-        <name>ELASTIC_CON</name>
-        <type>command line argument 9</type>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>60</xloc>
-      <yloc>340</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants 2</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>SIRED_ELA_MOV_TEMP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;movimenti&#x2f;mov_</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>http_ini</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SIRED_ELA_STRUT_TEMP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;strutture_estese&#x2f;ricettive_</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SIRED_ELA_STRUT_TEMP_2_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;strutture_estese&#x2f;ricettive_2015&#x2f;_search&#x3f;size&#x5c;&#x3d;50000</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SIRED_ELA_MOV_SOLID_TEMP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;movimenti_solid&#x2f;mov_solid_</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SIRED_ELA_MOV_BACK_TEMP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;movimenti_back_office&#x2f;mov_back_</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>SIRED_ELA_STRUT_TEMP_LOOKUP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>&#x2f;strutture_estese&#x2f;ricettive_2015&#x2f;_search</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>187</xloc>
-      <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -645,8 +412,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>290</xloc>
-      <yloc>340</yloc>
+      <xloc>367</xloc>
+      <yloc>316</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -738,101 +505,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>397</xloc>
-      <yloc>339</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Concat Fields 3</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>file</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>http_ini</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>ELASTIC_CON</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SIRED_ELA_STRUT_TEMP_2_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-<targetFieldName>SIRED_ELA_STRUT_TEMP_2</targetFieldName>
-<targetFieldLength>0</targetFieldLength>
-<removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>496</xloc>
-      <yloc>340</yloc>
+      <xloc>474</xloc>
+      <yloc>315</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -924,8 +598,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>495</xloc>
-      <yloc>445</yloc>
+      <xloc>523</xloc>
+      <yloc>419</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1017,15 +691,15 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>611</xloc>
-      <yloc>447</yloc>
+      <xloc>639</xloc>
+      <yloc>421</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Concat Fields 6</name>
-    <type>ConcatFields</type>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1034,91 +708,17 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>file</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>http_ini</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>ELASTIC_CON</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SIRED_ELA_STRUT_TEMP_LOOKUP_T</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-<targetFieldName>SIRED_ELA_STRUT_TEMP_LOOKUP</targetFieldName>
-<targetFieldLength>0</targetFieldLength>
-<removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>737</xloc>
-      <yloc>448</yloc>
+      <xloc>692</xloc>
+      <yloc>45</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Row Normaliser</name>
-    <type>Normaliser</type>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1127,81 +727,10 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <typefield>Chiave</typefield>
-    <fields>      <field>        <name>SIRED_STG_IP_INPUT</name>
-        <value>SIRED_STG_IP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_STG_PORTA_INPUT</name>
-        <value>SIRED_STG_PORTA</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_STG_USR_INPUT</name>
-        <value>SIRED_STG_USR</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_STG_PSW_INPUT</name>
-        <value>SIRED_STG_PSW</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_DASH_IP_INPUT</name>
-        <value>SIRED_DASH_IP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_DASH_PORTA_INPUT</name>
-        <value>SIRED_DASH_PORTA</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_DASH_USR_INPUT</name>
-        <value>SIRED_DASH_USR</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_DASH_PSW_INPUT</name>
-        <value>SIRED_DASH_PSW</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_MOV_TEMP</name>
-        <value>SIRED_ELA_MOV_TEMP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_STRUT_TEMP</name>
-        <value>SIRED_ELA_STRUT_TEMP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_STRUT_TEMP_2</name>
-        <value>SIRED_ELA_STRUT_TEMP_2</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_MOV_SOLID_TEMP</name>
-        <value>SIRED_ELA_MOV_SOLID_TEMP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_MOV_BACK_TEMP</name>
-        <value>SIRED_ELA_MOV_BACK_TEMP</value>
-        <norm>Valore</norm>
-        </field>      <field>        <name>SIRED_ELA_STRUT_TEMP_LOOKUP</name>
-        <value>SIRED_ELA_STRUT_TEMP_LOOKUP</value>
-        <norm>Valore</norm>
-        </field>      </fields>     <cluster_schema/>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>843</xloc>
-      <yloc>450</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>Chiave</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Valore</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>961</xloc>
-      <yloc>450</yloc>
+      <xloc>690</xloc>
+      <yloc>193</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1225,10 +754,25 @@
  <conditions>
   <condition>
    <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Chiave</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SIRED_ELA_MOV_BACK_TEMP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
    <leftvalue>Chiave</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>SIRED_STG_IP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Chiave</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SIRED_STG_DB</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
@@ -1263,6 +807,13 @@
    <leftvalue>Chiave</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SIRED_DASH_DB</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Chiave</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
    <value><name>constant</name><type>String</type><text>SIRED_DASH_PORTA</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
@@ -1271,6 +822,20 @@
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>SIRED_DASH_USR</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Chiave</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SIRED_DASH_PSW</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>Chiave</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SIRED_ELA_MOV_SOLID_TEMP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
@@ -1291,28 +856,21 @@
    <leftvalue>Chiave</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SIRED_ELA_STRUT_TEMP_2</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>MONGO_IP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
    <leftvalue>Chiave</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SIRED_ELA_MOV_SOLID_TEMP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>MONGO_PORTA</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
    <leftvalue>Chiave</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SIRED_ELA_MOV_BACK_TEMP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>Chiave</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SIRED_ELA_STRUT_TEMP_LOOKUP</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>MONGO_DB</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
@@ -1320,6 +878,363 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>478</xloc>
       <yloc>110</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get System Info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>POST_IP</name>
+        <type>command line argument 1</type>
+        </field>
+      <field>
+        <name>POST_PORTA</name>
+        <type>command line argument 2</type>
+        </field>
+      <field>
+        <name>POST_USR</name>
+        <type>command line argument 3</type>
+        </field>
+      <field>
+        <name>POST_PSW</name>
+        <type>command line argument 4</type>
+        </field>
+      <field>
+        <name>MONGO_IP</name>
+        <type>command line argument 5</type>
+        </field>
+      <field>
+        <name>MONGO_PORTA</name>
+        <type>command line argument 6</type>
+        </field>
+      <field>
+        <name>MONGO_DB</name>
+        <type>command line argument 7</type>
+        </field>
+      <field>
+        <name>ELASTIC_CON</name>
+        <type>command line argument 8</type>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>47</xloc>
+      <yloc>315</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get System Info 2</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>PATH_OUT</name>
+        <type>command line argument 9</type>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>807</xloc>
+      <yloc>196</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Properties Output</name>
+    <type>PropertyOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <keyfield>Chiave</keyfield>
+    <valuefield>Valore</valuefield>
+    <comment/>
+    <fileNameInField>Y</fileNameInField>
+    <fileNameField>path_completo</fileNameField>
+    <file>
+      <name/>
+      <extention>properties</extention>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <create_parent_folder>N</create_parent_folder>
+    <addtoresult>N</addtoresult>
+    <append>N</append>
+      </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1122</xloc>
+      <yloc>195</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Property Input </name>
+    <type>PropertyInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <file_type>property</file_type>
+    <encoding>UTF-8</encoding>
+    <include>N</include>
+    <include_field/>
+    <filename_Field/>
+    <rownum>N</rownum>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <rownum_field/>
+    <resetrownumber>N</resetrownumber>
+    <resolvevaluevariable>N</resolvevaluevariable>
+    <ini_section>N</ini_section>
+    <ini_section_field/>
+    <section/>
+    <file>
+      <name>&#x2f;opt&#x2f;pentaho&#x2f;.kettle&#x2f;kettle.properties</name>
+      <exclude_filemask/>
+      <filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>Chiave</name>
+        <column>key</column>
+        <type>String</type>
+        <format/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Valore</name>
+        <column>value</column>
+        <type>String</type>
+        <format/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <currency/>
+        <decimal/>
+        <group/>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>101</xloc>
+      <yloc>108</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Row Normaliser</name>
+    <type>Normaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <typefield>Chiave</typefield>
+    <fields>      <field>        <name>SIRED_STG_IP_INPUT</name>
+        <value>SIRED_STG_IP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_STG_PORTA_INPUT</name>
+        <value>SIRED_STG_PORTA</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_STG_USR_INPUT</name>
+        <value>SIRED_STG_USR</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_STG_PSW_INPUT</name>
+        <value>SIRED_STG_PSW</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_STG_DB_INPUT</name>
+        <value>SIRED_STG_DB</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_DASH_IP_INPUT</name>
+        <value>SIRED_DASH_IP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_DASH_PORTA_INPUT</name>
+        <value>SIRED_DASH_PORTA</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_DASH_USR_INPUT</name>
+        <value>SIRED_DASH_USR</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_DASH_DB_INPUT</name>
+        <value>SIRED_DASH_DB</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_DASH_PSW_INPUT</name>
+        <value>SIRED_DASH_PSW</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_ELA_MOV_TEMP</name>
+        <value>SIRED_ELA_MOV_TEMP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_ELA_STRUT_TEMP</name>
+        <value>SIRED_ELA_STRUT_TEMP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_ELA_MOV_SOLID_TEMP</name>
+        <value>SIRED_ELA_MOV_SOLID_TEMP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>SIRED_ELA_MOV_BACK_TEMP</name>
+        <value>SIRED_ELA_MOV_BACK_TEMP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>MONGO_IP_INPUT</name>
+        <value>MONGO_IP</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>MONGO_PORTA_INPUT</name>
+        <value>MONGO_PORTA</value>
+        <norm>Valore</norm>
+        </field>      <field>        <name>MONGO_DB_INPUT</name>
+        <value>MONGO_DB</value>
+        <norm>Valore</norm>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>747</xloc>
+      <yloc>421</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>Chiave</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Valore</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>865</xloc>
+      <yloc>421</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>POST_IP</name>
+        <rename>SIRED_STG_IP_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_IP</name>
+        <rename>SIRED_DASH_IP_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_PORTA</name>
+        <rename>SIRED_STG_PORTA_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_PORTA</name>
+        <rename>SIRED_DASH_PORTA_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_USR</name>
+        <rename>SIRED_STG_USR_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_USR</name>
+        <rename>SIRED_DASH_USR_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_PSW</name>
+        <rename>SIRED_STG_PSW_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>POST_PSW</name>
+        <rename>SIRED_DASH_PSW_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MONGO_IP</name>
+        <rename>MONGO_IP_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MONGO_PORTA</name>
+        <rename>MONGO_PORTA_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MONGO_DB</name>
+        <rename>MONGO_DB_INPUT</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ELASTIC_CON</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>155</xloc>
+      <yloc>315</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
