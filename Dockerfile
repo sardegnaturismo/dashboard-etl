@@ -14,7 +14,7 @@ RUN apt-get update; apt-get install zip netcat -y; \
     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y oracle-java7-installer postfix sharutils mailutils  && \
+    apt-get install -y oracle-java7-installer && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm -rf /var/cache/oracle-jdk7-installer
 
@@ -52,7 +52,6 @@ COPY ./setup.sh ${PENTAHO_HOME}/setup/setup.sh
 USER root
 RUN echo "pentaho ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R pentaho:pentaho ${PENTAHO_HOME}
-#RUN /root/setup.sh
 
 USER pentaho
 
@@ -60,6 +59,6 @@ USER pentaho
 WORKDIR ${PENTAHO_HOME}
 
 # Tramite la definizione del Volume, i file sotto ${PENTAHO_HOME} sono rimappati in maniera persistente sul FS dell'host
-VOLUME ${PENTAHO_HOME}
+#VOLUME ${PENTAHO_HOME}
 
 CMD ["/bin/bash", "/opt/pentaho/setup/setup.sh"]
