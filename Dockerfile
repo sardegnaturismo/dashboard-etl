@@ -27,16 +27,10 @@ RUN mkdir ${PENTAHO_HOME}; useradd -s /bin/bash -d ${PENTAHO_HOME} pentaho; chow
 
 USER pentaho
 
-# Download Pentaho Data Integration
-RUN /usr/bin/wget --progress=dot:giga http://downloads.sourceforge.net/project/pentaho/Data%20Integration/${KETTLE_VERSION}/pdi-ce-${KETTLE_TAG}.zip -O /tmp/pdi-ce-${KETTLE_TAG}.zip; \
-    /usr/bin/unzip -q /tmp/pdi-ce-${KETTLE_TAG}.zip -d  $PENTAHO_HOME; \
-    rm /tmp/pdi-ce-${KETTLE_TAG}.zip
-
 RUN mkdir -p ${PENTAHO_HOME}/.kettle
 RUN mkdir -p ${PENTAHO_HOME}/setup
-# Librerie customizzate
-COPY ./kettle-engine-5.0.1-stable.jar ${PENTAHO_HOME}/data-integration/lib/kettle-engine-5.0.1-stable.jar
-COPY ./kettle-ui-swt-5.0.1-stable-1.jar ${PENTAHO_HOME}/data-integration/lib/kettle-ui-swt-5.0.1-stable-1.jar
+# Data Integration con librerie customizzate
+COPY data-integration ${PENTAHO_HOME}/data-integration
 # Trasformazione kettle per cifratura password + script creazione file repositories.xml parametrizzato
 COPY ./repositories_xml.ktr ${PENTAHO_HOME}/setup/repositories_xml.ktr
 COPY ./create_repo.sh ${PENTAHO_HOME}/setup/create_repo.sh
