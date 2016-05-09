@@ -12,6 +12,7 @@ echo " -------------------------------------------- "
 
 #create_properties.sh -> crea kettle.properties
 ${PENTAHO_HOME}/setup/create_properties.sh
+sed -i "s/N_MESI=6/N_MESI=${MESI}/g" ${PENTAHO_HOME}/.kettle/kettle.properties
 echo "kettle.properties MODIFICATO"
 echo " -------------------------------------------- "
 #cat ${PENTAHO_HOME}/.kettle/kettle.properties
