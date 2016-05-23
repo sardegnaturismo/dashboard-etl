@@ -14,12 +14,5 @@ kettle:
     - MESI
   volumes:
     - /data/logs/kettle:/opt/pentaho/log_caricamenti
-  links:
-    - mongo
-mongo:
-  image: mongo:2.6.6
-  command: ["mongod", "--smallfiles"]
-  ports:
-    - 27018:27017
-  volumes:
-    - /data/mongo_data:/data/db
+  external_links:
+    - kettle_mongo_1

@@ -1,0 +1,7 @@
+mongo:
+  image: mongo:2.6.6
+  command: ["mongod", "--smallfiles"]
+  ports:
+    - 27018:27017
+  volumes:
+    - /data/mongo_data:/data/db
