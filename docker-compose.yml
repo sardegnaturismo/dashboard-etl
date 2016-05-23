@@ -1,0 +1,24 @@
+kettle:
+  image: sardegnaturismo/dashboard-etl:5.0
+  environment:
+    - POSTGRES_IP
+    - POSTGRES_PORT
+    - POSTGRES_USR
+    - POSTGRES_PSW
+    - ELASTIC_IP
+    - ELASTIC_PORT
+    - MONGO_IP
+    - MONGO_PORT
+    - MONGO_DB
+    - TRASF
+    - MESI
+  volumes:
+    - /data/logs/kettle:/opt/pentaho/log_caricamenti
+  links:
+    - mongo
+mongo:
+  image: mongo:2.6.6
+  ports:
+    - 27018:27017
+  volumes:
+    - /data/mongo_data:/data/db
