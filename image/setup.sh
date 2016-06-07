@@ -28,21 +28,18 @@ case $TRASF in
 		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_strutture_estese.sh
         ;;
         2)
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_solid.sh
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_back.sh
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_web.sh
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_cittadino/dash_cittadino.sh
+        	${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_solid.sh
         ;;
         3)
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_back.sh
-                ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_web.sh
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_operatore/dash_operatore.sh
+        	${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_back.sh
         ;;
         4)
-		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_solid.sh
-                ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_back.sh
-                ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_web.sh
-                ${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_cittadino/dash_cittadino.sh
+        	${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_elasticsearch/regime_movimenti_web.sh
+        ;;
+        5)
+		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_cittadino/dash_cittadino.sh
+        ;;
+        6)
 		${PENTAHO_HOME}/setup/scripts_trasformazioni/regime_operatore/dash_operatore.sh
         ;;
 esac
