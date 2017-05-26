@@ -13,7 +13,7 @@ ENV KETTLE_TAG 5.0.1-stable
 
 ENV PENTAHO_HOME /opt/pentaho
 
-#Install Updates, Dependencies and Oracle JDK 7
+# Install Updates, Dependencies and Oracle JDK 7
 RUN apt-get update && apt-get install zip netcat curl wget unzip vim python-software-properties software-properties-common postfix sharutils mailutils postgresql-client dnsutils -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -27,9 +27,10 @@ RUN mkdir ${PENTAHO_HOME}; useradd -s /bin/bash -d ${PENTAHO_HOME} pentaho; chow
 USER pentaho
 
 RUN mkdir -p ${PENTAHO_HOME}/.kettle ${PENTAHO_HOME}/setup ${PENTAHO_HOME}/functions ${PENTAHO_HOME}/jdk1.7.0_79
-COPY jdk1.7.0_79.zip ${PENTAHO_HOME}/jdk1.7.0_79.zip
+
+COPY jdk1.7.0_79 ${PENTAHO_HOME}/jdk1.7.0_79
 # Data Integration con librerie customizzate Extra
-COPY data-integration.zip ${PENTAHO_HOME}/data-integration.zip
+COPY data-integration ${PENTAHO_HOME}/data-integration
 # Trasformazione kettle per cifratura password + script creazione file repositories.xml parametrizzato
 COPY ./repositories_xml.ktr ${PENTAHO_HOME}/setup/repositories_xml.ktr
 COPY ./create_repo.sh ${PENTAHO_HOME}/setup/create_repo.sh
@@ -52,7 +53,6 @@ RUN chown -R pentaho:pentaho ${PENTAHO_HOME}
 
 USER pentaho
 
-# Quando ci si collega alla bash, $pwd = WORKDIR
 WORKDIR ${PENTAHO_HOME}
 
 CMD ["/bin/bash", "/opt/pentaho/setup/setup.sh"]

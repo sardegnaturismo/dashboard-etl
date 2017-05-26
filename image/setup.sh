@@ -9,11 +9,6 @@ WEB_INDEX=movimenti
 
 sudo /etc/init.d/postfix start
  
-unzip data-integration.zip > /dev/null
-unzip jdk1.7.0_79.zip > /dev/null
-
-rm -f data-integration.zip jdk1.7.0_79.zip
-
 echo "Inizio esecuzione : $INIZIO" | mail -s " DASHBOARD CITTADINO - Inizio aggiornamento " $DESTINATARI
 
 #permessi di scrittura per l'utente pentaho sulla directory persistente dei logs
