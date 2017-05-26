@@ -1,0 +1,104 @@
+#!/bin/bash
+
+INDEX=$1
+TYPE=$2
+DELETE=$3
+
+copyToWork() {
+	echo "Copy $INDEX from live to work"
+	echo " -------------------------------------------- "
+	curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live/_reindex/${INDEX}_work?wait_for_completion=true
+	sleep 15
+}
+
+copyToOld() {
+	echo "Copy $INDEX from live to old"
+	echo " -------------------------------------------- "
+        curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live/_reindex/${INDEX}_old?wait_for_completion=true
+	sleep 15
+}
+
+copyToLive() {
+	echo "Copy $INDEX from work to live"
+        echo " -------------------------------------------- "
+        curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_reindex/${INDEX}_live?wait_for_completion=true
+	sleep 15
+}
+
+closeCopyWork() {
+	echo "Close work $INDEX"
+        echo " -------------------------------------------- "
+	curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_close
+}
+
+changeAliasToWork() {
+	local INDEX=$1
+	echo "Change alias $INDEX from live to work"
+        echo " -------------------------------------------- "
+	curl -s -XPOST 'http://'${ELASTIC_IP}':'${ELASTIC_PORT}'/_aliases' -d '
+	{
+    	"actions" : [
+        	{ "remove" : { "index" : "'${INDEX}'_live", "alias" : "'${INDEX}'" } },
+        	{ "add" : { "index" : "'${INDEX}'_work", "alias" : "'${INDEX}'" } }
+   	]
+	}'
+}
+
+changeAliasToLive() {
+	local INDEX=$1
+	echo "Change alias $INDEX from work to live"
+        echo " -------------------------------------------- "
+        curl -s -XPOST 'http://'${ELASTIC_IP}':'${ELASTIC_PORT}'/_aliases' -d '
+        {
+        "actions" : [
+                { "remove" : { "index" : "'${INDEX}'_work", "alias" : "'${INDEX}'" } },
+                { "add" : { "index" : "'${INDEX}'_live", "alias" : "'${INDEX}'" } }
+        ]
+        }'
+}
+
+deleteWork () {
+	echo "Delete $INDEX work"
+        echo " -------------------------------------------- "	
+	curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work
+}
+
+deleteLive () {
+        echo "Delete $INDEX live"
+        echo " -------------------------------------------- "
+        curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live
+}
+
+deleteOld () {
+        echo "Delete $INDEX old"
+        echo " -------------------------------------------- "
+        curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_old
+}
+
+deleteMapping() {
+        echo "Delete $INDEX work type ${TYPE}_${DELETE}"
+        echo " -------------------------------------------- "
+        curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_mapping/${TYPE}_${DELETE}
+}
+
+prepareIndexes() {
+	local INDEX=$1
+	deleteOld $INDEX
+	copyToOld $INDEX
+	deleteLive $INDEX
+	copyToLive $INDEX
+	changeAliasToLive $INDEX
+	deleteWork $INDEX
+}
+
+revertIndexes() {
+	local INDEX=$1
+	changeAliasToLive $INDEX
+	deleteWork $INDEX
+}
+
+aliasInWork () {
+        local INDEX=$1
+	curl -s -XGET ${ELASTIC_IP}:${ELASTIC_PORT}'/'${INDEX}'_work/_alias/?pretty' | grep -w ${INDEX}
+}
+

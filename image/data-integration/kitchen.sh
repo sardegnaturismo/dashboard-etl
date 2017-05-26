@@ -47,7 +47,7 @@ fi
 # ******************************************************************
 
 if [ -z "$JAVAMAXMEM" ]; then
-  JAVAMAXMEM="6144"
+  JAVAMAXMEM="13312"
 fi
 
 if [ -z "$PENTAHO_DI_JAVA_OPTIONS" ]; then

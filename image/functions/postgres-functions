@@ -1,0 +1,112 @@
+#!/bin/bash
+
+alterDB () {
+
+DB=$1
+POSTGRES_IP=$2
+POSTGRES_PORT=$3
+POSTGRES_USER=$4 
+POSTGRES_PSW=$5
+
+set -e
+set -u
+
+export PGPASSWORD=$POSTGRES_PSW
+
+psql \
+    -X \
+    -U $POSTGRES_USER \
+    -h $POSTGRES_IP \
+    -p $POSTGRES_PORT \
+    -c "SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '$DB';
+    ALTER DATABASE $DB RENAME TO ${DB}_old;
+    SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '${DB}_temp';
+    ALTER DATABASE ${DB}_temp RENAME TO $DB;
+    SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '${DB}_old';
+    ALTER DATABASE ${DB}_old RENAME TO ${DB}_temp;" \
+    --set ON_ERROR_STOP=on 
+}
+
+updateIP () {
+
+DB=$1
+POSTGRES_IP=$2
+POSTGRES_PORT=$3
+POSTGRES_USER=$4
+POSTGRES_PSW=$5
+IP=$6
+
+set -e
+set -u
+
+export PGPASSWORD=$POSTGRES_PSW
+
+psql \
+    -X \
+    -U $POSTGRES_USER \
+    -h $POSTGRES_IP \
+    -p $POSTGRES_PORT \
+    -d $DB \
+    -c "UPDATE r_step_attribute SET value_str = '${IP}' WHERE code = 'server_address';" \
+    --set ON_ERROR_STOP=on
+
+}
+
+updatePORT() {
+
+DB=$1
+POSTGRES_IP=$2
+POSTGRES_PORT=$3
+POSTGRES_USER=$4
+POSTGRES_PSW=$5
+PORT=$6
+
+set -e
+set -u
+
+export PGPASSWORD=$POSTGRES_PSW
+
+psql \
+    -X \
+    -U $POSTGRES_USER \
+    -h $POSTGRES_IP \
+    -p $POSTGRES_PORT \
+    -d $DB \
+    -c "UPDATE r_step_attribute SET value_num = '${PORT}' WHERE code = 'server_port';" \
+    --set ON_ERROR_STOP=on
+
+} 
+
+updateCLUSTERNAME () {
+
+DB=$1
+POSTGRES_IP=$2
+POSTGRES_PORT=$3
+POSTGRES_USER=$4
+POSTGRES_PSW=$5
+CLUSTERNAME=$6
+
+set -e
+set -u
+
+export PGPASSWORD=$POSTGRES_PSW
+
+psql \
+    -X \
+    -U $POSTGRES_USER \
+    -h $POSTGRES_IP \
+    -p $POSTGRES_PORT \
+    -d $DB \
+    -c "UPDATE r_step_attribute SET value_str = '${CLUSTERNAME}' WHERE code = 'setting_value';" \
+    --set ON_ERROR_STOP=on
+
+}
