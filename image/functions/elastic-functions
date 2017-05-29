@@ -5,6 +5,7 @@ TYPE=$2
 DELETE=$3
 
 copyToWork() {
+	local INDEX=$1
 	echo "Copy $INDEX from live to work"
 	echo " -------------------------------------------- "
 	curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live/_reindex/${INDEX}_work?wait_for_completion=true
@@ -12,6 +13,7 @@ copyToWork() {
 }
 
 copyToOld() {
+	local INDEX=$1
 	echo "Copy $INDEX from live to old"
 	echo " -------------------------------------------- "
         curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live/_reindex/${INDEX}_old?wait_for_completion=true
@@ -19,6 +21,7 @@ copyToOld() {
 }
 
 copyToLive() {
+	local INDEX=$1
 	echo "Copy $INDEX from work to live"
         echo " -------------------------------------------- "
         curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_reindex/${INDEX}_live?wait_for_completion=true
@@ -26,6 +29,7 @@ copyToLive() {
 }
 
 closeCopyWork() {
+	local INDEX=$1
 	echo "Close work $INDEX"
         echo " -------------------------------------------- "
 	curl -XPOST ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_close
@@ -58,24 +62,29 @@ changeAliasToLive() {
 }
 
 deleteWork () {
+	local INDEX=$1
 	echo "Delete $INDEX work"
         echo " -------------------------------------------- "	
 	curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work
 }
 
 deleteLive () {
+	local INDEX=$1
         echo "Delete $INDEX live"
         echo " -------------------------------------------- "
         curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_live
 }
 
 deleteOld () {
+	local INDEX=$1
         echo "Delete $INDEX old"
         echo " -------------------------------------------- "
         curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_old
 }
 
 deleteMapping() {
+	local INDEX=$1
+	local TYPE=$2 
         echo "Delete $INDEX work type ${TYPE}_${DELETE}"
         echo " -------------------------------------------- "
         curl -s -XDELETE ${ELASTIC_IP}:${ELASTIC_PORT}/${INDEX}_work/_mapping/${TYPE}_${DELETE}
@@ -101,4 +110,3 @@ aliasInWork () {
         local INDEX=$1
 	curl -s -XGET ${ELASTIC_IP}:${ELASTIC_PORT}'/'${INDEX}'_work/_alias/?pretty' | grep -w ${INDEX}
 }
-

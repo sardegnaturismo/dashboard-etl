@@ -21,7 +21,7 @@ while [ $CONNECTION -lt 4 ] && [ $RETRY -lt 2 ]; do
          then mv ${LOGFILE_JOB}.log ${LOGFILE_JOB}_$(date +%H%m).log
         fi
 
-	nohup /opt/pentaho/data-integration/kitchen.sh /rep:"sired_pdi_repo" /job:"J_DASH_OPERATORE_FAST" /dir:/SIRED/DASHBOARD/NEW_OPERATORE_FAST /user:admin /pass:admin /level:Basic &> ${LOGFILE_JOB}.log
+	nohup /opt/pentaho/data-integration/kitchen.sh /rep:"${POSTGRES_REPO}" /job:"J_DASH_OPERATORE_FAST" /dir:/SIRED/DASHBOARD/NEW_OPERATORE_FAST /user:admin /pass:admin /level:Basic &> ${LOGFILE_JOB}.log
 	
 	grep "An\ error\ occured\ loading\ the\ directory\ tree\ from\ the\ repository" ${LOGFILE_JOB}.log
         if [ $? -eq 0 ]
@@ -60,7 +60,7 @@ while [ $OK -lt 2 ]; do
          then mv ${LOGFILE_QUAD}.log ${LOGFILE_QUAD}_$(date +%H%m).log
         fi
 
-	nohup /opt/pentaho/data-integration/kitchen.sh /rep:"sired_pdi_repo" /job:"J_QUAD_ELASTIC_POSTGRES_WEB_OPE" /dir:/SIRED/QUERY_CHECK/WEB_BACK_POSTGRES_OPE /user:admin /pass:admin /level:Basic &>> ${LOGFILE_QUAD}.log
+	nohup /opt/pentaho/data-integration/kitchen.sh /rep:"${POSTGRES_REPO}" /job:"J_QUAD_ELASTIC_POSTGRES_WEB_OPE" /dir:/SIRED/QUERY_CHECK/WEB_BACK_POSTGRES_OPE /user:admin /pass:admin /level:Basic &>> ${LOGFILE_QUAD}.log
 
 	grep "An\ error\ occured\ loading\ the\ directory\ tree\ from\ the\ repository" ${LOGFILE_QUAD}.log
         if [ $? -eq 0 ]
