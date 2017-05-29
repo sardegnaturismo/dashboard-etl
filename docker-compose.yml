@@ -1,7 +1,7 @@
 kettle:
-  image: sardegnaturismo/dashboard-etl:cittadino
+  image: sardegnaturismo/dashboard-etl:operatore
   mem_limit: 13312m
-  hostname: etl-cittadino
+  hostname: etl-operatore
   domainname: extrasys.it
   environment:
     - MESI
@@ -34,7 +34,7 @@ kettle:
     - MONGO_ANAGRAFE_IP
     - MONGO_ANAGRAFE_PORTA
     - MONGO_ANAGRAFE_DB
-    #WEB SERVICES
+    #WEB SERVICE
     - SIRED_MONTLY_ACTIVITY_URL
     #URL TEST
     - SIRED_ELA_TEST_CON
@@ -43,9 +43,8 @@ kettle:
     - DESTINATARI
 
   volumes:
-    # il primo path se non c'è lo crea
-    - /data/kettle/cittadino/logs:/opt/pentaho/log_caricamenti 
-    - /data/kettle/cittadino/check:/opt/pentaho/check_files
+    - /data/kettle/operatore/logs:/opt/pentaho/log_caricamenti 
+    - /data/kettle/operatore/check:/opt/pentaho/check_files
     - /etc/localtime:/etc/localtime:ro
   
   external_links:

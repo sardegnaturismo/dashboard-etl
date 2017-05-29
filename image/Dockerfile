@@ -53,6 +53,7 @@ RUN chown -R pentaho:pentaho ${PENTAHO_HOME}
 
 USER pentaho
 
+# Quando ci si collega alla bash, $pwd = WORKDIR
 WORKDIR ${PENTAHO_HOME}
 
 CMD ["/bin/bash", "/opt/pentaho/setup/setup.sh"]

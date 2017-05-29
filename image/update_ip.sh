@@ -8,7 +8,7 @@ if [[ $IP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]
 then
 	updateIP $POSTGRES_REPO $POSTGRES_IP $POSTGRES_PORTA $POSTGRES_USR $POSTGRES_PSW $IP 
 else 
-	echo -e "In fase di update dell'IP di ElasticSearch nel DB Postgres non è stato possibile determinare l'IP di $ELASTIC_IP" | mail -s " DASHBOARD CITTADINO - Aggiornamento fallito " $DESTINATARI	
+	echo -e "In fase di update dell'IP di ElasticSearch nel DB Postgres non è stato possibile determinare l'IP di $ELASTIC_IP" | mail -s " DASHBOARD OPERATORE - Aggiornamento fallito " $DESTINATARI	
 	sleep 10
 	exit 1
 fi
