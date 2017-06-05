@@ -1,52 +1,56 @@
-kettle:
-  image: sardegnaturismo/dashboard-etl:cittadino
-  mem_limit: 13312m
-  hostname: etl-cittadino
-  domainname: extrasys.it
-  environment:
-    - MESI
-    #DB POSTGRES
-    - POSTGRES_IP
-    - POSTGRES_PORTA
-    - POSTGRES_USR
-    - POSTGRES_PSW
-    - POSTGRES_REPO
-    - SIRED_DASH_DB
-    - SIRED_DASH_IP
-    - SIRED_DASH_PORTA
-    - SIRED_DASH_USR
-    - SIRED_DASH_PSW
-    - SIRED_STG_DB
-    - SIRED_STG_IP
-    - SIRED_STG_PORTA
-    - SIRED_STG_USR
-    - SIRED_STG_PSW
-    - DASH_TARGET
-    #ELASTICSEARCH
-    - ELASTIC_IP
-    - ELASTIC_PORT
-    - ELASTIC_INT_PORT
-    - ELASTIC_CLUSTERNAME
-    #DB MONGO
-    - SIRED_MONGO_IP
-    - SIRED_MONGO_PORTA
-    - SIRED_MONGO_DB
-    - MONGO_ANAGRAFE_IP
-    - MONGO_ANAGRAFE_PORTA
-    - MONGO_ANAGRAFE_DB
-    #WEB SERVICES
-    - SIRED_MONTLY_ACTIVITY_URL
-    #URL TEST
-    - SIRED_ELA_TEST_CON
-    - SIRED_WS_TEST_CON
-    #RECEIVER
-    - DESTINATARI
+version: "2"
+services:
+  kettle:
+    image: sardegnaturismo/dashboard-etl:cittadino
+    mem_limit: 13312m
+    hostname: etl-cittadino
+    domainname: extrasys.it
+    environment:
+      - MESI
+      #DB POSTGRES
+      - POSTGRES_IP
+      - POSTGRES_PORTA
+      - POSTGRES_USR
+      - POSTGRES_PSW
+      - POSTGRES_REPO
+      - SIRED_DASH_DB
+      - SIRED_DASH_IP
+      - SIRED_DASH_PORTA
+      - SIRED_DASH_USR
+      - SIRED_DASH_PSW
+      - SIRED_STG_DB
+      - SIRED_STG_IP
+      - SIRED_STG_PORTA
+      - SIRED_STG_USR
+      - SIRED_STG_PSW
+      - DASH_TARGET
+      #ELASTICSEARCH
+      - ELASTIC_IP
+      - ELASTIC_PORT
+      - ELASTIC_INT_PORT
+      - ELASTIC_CLUSTERNAME
+      #DB MONGO
+      - SIRED_MONGO_IP
+      - SIRED_MONGO_PORTA
+      - SIRED_MONGO_DB
+      - MONGO_ANAGRAFE_IP
+      - MONGO_ANAGRAFE_PORTA
+      - MONGO_ANAGRAFE_DB
+      #WEB SERVICES
+      - SIRED_MONTLY_ACTIVITY_URL
+      #URL TEST
+      - SIRED_ELA_TEST_CON
+      - SIRED_WS_TEST_CON
+      #RECEIVER
+      - DESTINATARI
 
-  volumes:
-    # il primo path se non c'è lo crea
-    - /data/kettle/cittadino/logs:/opt/pentaho/log_caricamenti 
-    - /data/kettle/cittadino/check:/opt/pentaho/check_files
-    - /etc/localtime:/etc/localtime:ro
-  
-  external_links:
-    - kettle_mongo_1
+    volumes:
+      # il primo path se non c'è lo crea
+      - /data/kettle/cittadino/logs:/opt/pentaho/log_caricamenti 
+      - /data/kettle/cittadino/check:/opt/pentaho/check_files
+      - /etc/localtime:/etc/localtime:ro
+
+networks:
+  default:
+    external:
+      name: dashboardsiredadapter_etl
