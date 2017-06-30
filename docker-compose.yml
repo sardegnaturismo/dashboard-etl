@@ -7,6 +7,7 @@ services:
     domainname: extrasys.it
     environment:
       - MESI
+      - SOGLIA
       #DB POSTGRES
       - POSTGRES_IP
       - POSTGRES_PORTA
