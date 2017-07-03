@@ -105,9 +105,10 @@ if [ $? -eq 0 ]
         		prepareIndexes $BACK_INDEX
         		prepareIndexes $WEB_BACK_INDEX
         		prepareIndexes $WEB_INDEX
-                        echo -e "Inizio esecuzione : $INIZIO \n Fine esecuzione : $(date +%c) " | mail -s " DASHBOARD OPERATORE - Aggiornamento terminato con successo " $DESTINATARI
+                        echo -e "Inizio esecuzione : $INIZIO \n Fine esecuzione : $(date +%c) \n Controllare l'esito dell'alter DB nella mail precedente " | mail -s " DASHBOARD OPERATORE - Aggiornamento terminato " $DESTINATARI
 			sleep 5
          	else
+			# Ramo else delle quadrature operatore fallite
         		echo "revert index str-est/back/web-back/web $(date)"
 			revertIndexes $STR_EST_INDEX
 	        	revertIndexes $BACK_INDEX

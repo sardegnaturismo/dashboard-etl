@@ -40,6 +40,8 @@ COPY ./kettle.properties ${PENTAHO_HOME}/.kettle/kettle.properties
 COPY ./sed_env_var.sh ${PENTAHO_HOME}/setup/sed_env_var.sh
 # Script di update dell'ip di ElasticSearch
 COPY ./update_ip.sh ${PENTAHO_HOME}/setup/update_ip.sh
+# Script di scambio dei DB a caricamento validato
+COPY ./alter_db.sh ${PENTAHO_HOME}/setup/alter_db.sh
 # Script trasformazioni kettle per caricamenti notturni
 COPY scripts_trasformazioni ${PENTAHO_HOME}/setup/scripts_trasformazioni
 # Script di orchestrazione all'avvio, richiama gli altri script
