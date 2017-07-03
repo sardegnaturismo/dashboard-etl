@@ -9,7 +9,6 @@ LOGFILE_QUAD_WEB="/opt/pentaho/log_caricamenti/quad_web_dash_cittadino"
 DATA=$(date +%Y/%m/%d)
 
 echo "INIZIO DASH CITTADINO $(date)"
-echo " DB = $DB e DASH_TARGET = $DASH_TARGET "
 
 RETRY=0
 CONNECTION=0
@@ -119,7 +118,11 @@ if [ $? -eq 0 ]
 fi
 
 #se tutto ok faccio rename del DB
-echo "alter DB"
-alterDB $DB $SIRED_DASH_IP $SIRED_DASH_PORTA $SIRED_DASH_USR $SIRED_DASH_PSW
-echo " Alter DB eseguito con successo " | mail -s " DASHBOARD CITTADINO - Nuovi dati online " $DESTINATARI
+${PENTAHO_HOME}/setup/alter_db.sh
+
+if [ $? -eq 0 ]; then
+    echo " Alter DB eseguito con successo " | mail -s " DASHBOARD CITTADINO - Nuovi dati online " $DESTINATARI
+else
+    echo " Per eseguire manualmente: \n ALTER DATABASE $DB RENAME TO ${DB}_old; \n ALTER DATABASE ${DB}_temp RENAME TO $DB; \n ALTER DATABASE ${DB}_old RENAME TO ${DB}_temp; " | mail -s " DASHBOARD CITTADINO - Dati validati, alter DB fallito " $DESTINATARI
+fi
 sleep 10

@@ -89,9 +89,10 @@ if [ $? -eq 0 ]
         		prepareIndexes $STR_EST_INDEX
         		prepareIndexes $SOLID_INDEX
         		prepareIndexes $WEB_INDEX
-			echo -e "Inizio esecuzione : $INIZIO \n Fine esecuzione : $(date +%c) " | mail -s " DASHBOARD CITTADINO - Aggiornamento terminato con successo " $DESTINATARI
+			echo -e "Inizio esecuzione : $INIZIO \n Fine esecuzione : $(date +%c) \n Controllare l'esito dell'alter DB nella mail precedente" | mail -s " DASHBOARD CITTADINO - Aggiornamento terminato " $DESTINATARI
 			sleep 5
          	else
+			# Ramo else delle quadrature cittadino fallite
         		echo "revert index str-est/solid/web $(date)"
 			revertIndexes $STR_EST_INDEX
 	        	revertIndexes $SOLID_INDEX
