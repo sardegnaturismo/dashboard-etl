@@ -1,0 +1,22 @@
+FALLIMENTO alterDB(), eseguire a mano l'operazione:
+
+psql \
+    -X \
+    -U <username> \
+    -h <host> \
+    -p <port> \
+    -c "SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '<nome_database>';
+    ALTER DATABASE <nome_database> RENAME TO <nome_database>_old;
+    SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '<nome_database>_temp';
+    ALTER DATABASE <nome_database>_temp RENAME TO <nome_database>;
+    SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid( )
+    AND datname = '<nome_database>_old';
+    ALTER DATABASE <nome_database>_old RENAME TO <nome_database>_temp;

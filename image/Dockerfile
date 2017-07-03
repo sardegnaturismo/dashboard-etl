@@ -42,6 +42,7 @@ COPY ./sed_env_var.sh ${PENTAHO_HOME}/setup/sed_env_var.sh
 COPY ./update_ip.sh ${PENTAHO_HOME}/setup/update_ip.sh
 # Script di scambio dei DB a caricamento validato
 COPY ./alter_db.sh ${PENTAHO_HOME}/setup/alter_db.sh
+COPY ./alter_db_ko.txt ${PENTAHO_HOME}/setup/alter_db_ko.txt
 # Script trasformazioni kettle per caricamenti notturni
 COPY scripts_trasformazioni ${PENTAHO_HOME}/setup/scripts_trasformazioni
 # Script di orchestrazione all'avvio, richiama gli altri script
