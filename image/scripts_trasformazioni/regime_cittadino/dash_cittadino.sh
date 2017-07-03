@@ -6,6 +6,7 @@ DB=${DASH_TARGET}
 LOGFILE_JOB="/opt/pentaho/log_caricamenti/dash_cittadino"
 LOGFILE_QUAD_SOLID="/opt/pentaho/log_caricamenti/quad_solid_dash_cittadino"
 LOGFILE_QUAD_WEB="/opt/pentaho/log_caricamenti/quad_web_dash_cittadino"
+LOGFILE_ALTERDB="/opt/pentaho/log_caricamenti/alterdb.log"
 DATA=$(date +%Y/%m/%d)
 
 echo "INIZIO DASH CITTADINO $(date)"
@@ -122,7 +123,9 @@ ${PENTAHO_HOME}/setup/alter_db.sh
 
 if [ $? -eq 0 ]; then
     echo " Alter DB eseguito con successo " | mail -s " DASHBOARD CITTADINO - Nuovi dati online " $DESTINATARI
+    echo " alterDB() eseguito con successo " > ${LOGFILE_ALTERDB}
 else
-    echo " Per eseguire manualmente: \n ALTER DATABASE $DB RENAME TO ${DB}_old; \n ALTER DATABASE ${DB}_temp RENAME TO $DB; \n ALTER DATABASE ${DB}_old RENAME TO ${DB}_temp; " | mail -s " DASHBOARD CITTADINO - Dati validati, alter DB fallito " $DESTINATARI
+    cat ${PENTAHO_HOME}/setup/alter_db_ko.txt | mail -s " DASHBOARD CITTADINO - Dati validati, alter DB fallito " $DESTINATARI
+    cat ${PENTAHO_HOME}/setup/alter_db_ko.txt > ${LOGFILE_ALTERDB} 
 fi
 sleep 10
