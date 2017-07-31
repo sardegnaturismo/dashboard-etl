@@ -42,6 +42,8 @@ kettle:
     - SIRED_WS_TEST_CON
     #RECEIVER
     - DESTINATARI
+    #TIMEZONE
+    - TIMEZONE
 
   volumes:
     - /data/kettle/operatore/logs:/opt/pentaho/log_caricamenti 
