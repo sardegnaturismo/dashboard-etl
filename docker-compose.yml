@@ -49,7 +49,6 @@ services:
       # il primo path se non c'è lo crea
       - /data/kettle/cittadino/logs:/opt/pentaho/log_caricamenti 
       - /data/kettle/cittadino/check:/opt/pentaho/check_files
-      - /etc/localtime:/etc/localtime:ro
 
 networks:
   default:
