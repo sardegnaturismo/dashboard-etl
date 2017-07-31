@@ -46,7 +46,6 @@ kettle:
   volumes:
     - /data/kettle/operatore/logs:/opt/pentaho/log_caricamenti 
     - /data/kettle/operatore/check:/opt/pentaho/check_files
-    - /etc/localtime:/etc/localtime:ro
   
   external_links:
     - kettle_mongo_1
