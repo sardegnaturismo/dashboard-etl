@@ -44,6 +44,8 @@ services:
       - SIRED_WS_TEST_CON
       #RECEIVER
       - DESTINATARI
+      #TIMEZONE
+      - TIMEZONE
 
     volumes:
       # il primo path se non c'è lo crea
