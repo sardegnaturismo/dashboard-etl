@@ -8,9 +8,6 @@ ENV LANG it_IT.UTF-8
 ENV LANGUAGE it
 ENV LC_ALL it_IT.UTF-8
 
-ENV TZ=Europe/Rome
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 ENV KETTLE_VERSION 5.0.1-stable
 ENV KETTLE_TAG 5.0.1-stable
 

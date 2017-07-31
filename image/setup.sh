@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#set Timezone
+TZ=$TIMEZONE
+ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 . ${PENTAHO_HOME}/functions/elastic-functions
 
 INIZIO=$(date +%c)
